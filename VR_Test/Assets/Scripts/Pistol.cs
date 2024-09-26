@@ -7,7 +7,8 @@ using TMPro;
 public class Pistol : MonoBehaviour
 {
     public GameObject objectToCreate;
-    public int bulletCount = 0; 
+    public int bulletCount = 0;
+    public float launchSpeed;
     // Update is called once per frame
    
 
@@ -17,7 +18,7 @@ public class Pistol : MonoBehaviour
         if(context.phase == InputActionPhase.Started)
         {
             GameObject createdObject = Instantiate(objectToCreate, transform.position, transform.rotation);
-            createdObject.GetComponent<Rigidbody>().AddForce(transform.forward * 10f, ForceMode.Impulse);
+            createdObject.GetComponent<Rigidbody>().AddForce(transform.forward * launchSpeed, ForceMode.Impulse);
             
         }
         

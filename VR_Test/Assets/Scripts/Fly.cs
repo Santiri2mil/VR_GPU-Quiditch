@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class Fly : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float speed, rotateSpeed, plusSpeed;
+    [SerializeField] private float speed, rotateSpeed, plusSpeed, heightSpeed;
     [SerializeField] private bool isFlying;
     private float axisValue, axisValue2;
     // Start is called before the first frame update
@@ -41,7 +41,7 @@ public class Fly : MonoBehaviour
         // Aplicar el movimiento basado en el valor del eje
         Debug.Log("Axis Value: " + axisValue);
     }
-    private void FixedUpdate()
+    private void Update()
     {
         float finalSpeed;
         if(isFlying)
@@ -53,8 +53,9 @@ public class Fly : MonoBehaviour
         {
             finalSpeed = speed;
         }
-        rb.MovePosition(transform.position + transform.forward * finalSpeed * Time.deltaTime);
-        transform.Translate(Vector3.up * axisValue * speed * Time.deltaTime);
+        //rb.MovePosition(transform.position + transform.forward * finalSpeed * Time.deltaTime);
+        transform.Translate(Vector3.forward * finalSpeed * Time.deltaTime);
+        transform.Translate(Vector3.up * axisValue * heightSpeed * Time.deltaTime);
         transform.Rotate(Vector3.up * axisValue2 * rotateSpeed * Time.deltaTime);
         
     }

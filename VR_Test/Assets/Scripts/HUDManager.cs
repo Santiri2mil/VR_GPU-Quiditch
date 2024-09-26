@@ -5,22 +5,24 @@ using TMPro;
 
 public class HUDManager : MonoBehaviour
 {
-    public TextMeshProUGUI textInScene;
-    public int bulletCount = 0;
-    
+    public TextMeshProUGUI textInScene, timer;
+    public int pointCount = 0;
+    public Cronometro timing;
+  
     public void UpdateText ()
     {
-        bulletCount++;
-        textInScene.text = bulletCount.ToString();
+        pointCount++;
+        textInScene.text = pointCount.ToString();
     }
 
     
     // Start is called before the first frame update
-    public void UpdateBulletCount()
+    public void UpdateBulletCount(int points)
     {
-        bulletCount++;
-        textInScene.text = bulletCount.ToString();
+        pointCount+=points;
+        textInScene.text = pointCount.ToString();
     }
      
+   
 
 }
