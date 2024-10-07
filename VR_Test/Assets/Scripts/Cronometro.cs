@@ -8,15 +8,19 @@ public class Cronometro : MonoBehaviour
     // Start is called before the first frame update
     
     public TextMeshProUGUI tiempoText;
-    private float tiempo; // Tiempo acumulado
+   [SerializeField] private float tiempo, airTime; // Tiempo acumulado
     private bool corriendo = false; // Indica si el cronómetro está corriendo
+    [SerializeField]private Fly playerFly;
+    public bool metaVuelo;
 
     // Al iniciar el juego
     void Start()
     {
         tiempo = 0f; // Inicializamos el tiempo
+        airTime = 0f;
         ActualizarTiempoText();
         IniciarCronometro();
+        metaVuelo = false;
     }
 
     // Update se llama una vez por frame
@@ -27,9 +31,10 @@ public class Cronometro : MonoBehaviour
         {
             tiempo += Time.deltaTime;
             ActualizarTiempoText();
+            DesafioVuelo();
         }
     }
-
+    
     // Método para iniciar el cronómetro
     public void IniciarCronometro()
     {
@@ -58,5 +63,26 @@ public class Cronometro : MonoBehaviour
         int milisegundos = Mathf.FloorToInt((tiempo * 100F) % 100F);
 
         tiempoText.text = string.Format("{0:00}:{1:00}:{2:00}", minutos, segundos, milisegundos);
+
     }
+    public void DesafioVuelo()
+    {
+        if (!playerFly.isGrounded)
+        {
+            airTime += Time.deltaTime;//Contamos el tiempo en el aire
+            if (airTime > 30f)
+            {
+                metaVuelo = true;
+            }
+        }
+        else
+        {
+            airTime = 0f;
+        }
+    }
+    public bool RegresarTiempoVolando()
+    {
+        return metaVuelo;
+    }
+
 }

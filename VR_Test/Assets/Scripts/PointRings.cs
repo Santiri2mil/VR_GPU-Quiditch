@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PointRings : MonoBehaviour
 {
-    [SerializeField] int scorePoints;
+    private int scorePoints;
     public bool extraRing;
     
     public HUDManager pointScore;
@@ -19,7 +19,7 @@ public class PointRings : MonoBehaviour
         {
             scorePoints = 10;
         }
-        pointScore.UpdateBulletCount(scorePoints);
+        pointScore.UpdatePointCount(scorePoints);
         Debug.Log("Point");
     }
 
